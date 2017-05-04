@@ -10,6 +10,15 @@ npm install --save trim-image
 ```
 
 # Params
+
+```
+trimImage(filename, filenameOut [, crop|callback [, callback]]);
+
+trimImage(filename, filenameOut, crop);
+trimImage(filename, filenameOut, callback);
+trimImage(filename, filenameOut, crop, callback);
+```
+
 Property           | Necessary | Type         | Plugin default value
 -------------------|-----------|--------------|-----------
 filename           | yes       | `string`     |
