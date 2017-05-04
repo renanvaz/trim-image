@@ -1,6 +1,6 @@
 {
   "name": "trim-image",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Remove transparent pixels from image borders",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "get-pixels": "^3.3.0",
+    "mkdirp": "^0.5.1",
     "save-pixels": "^2.3.4"
   }
 }
