@@ -12,18 +12,19 @@ npm install --save trim-image
 # Params
 
 ```
-trimImage(filename, filenameOut [, crop|callback [, callback]]);
+trimImage(filename, filenameOut [, cropInfo|callback [, callback]]);
 
-trimImage(filename, filenameOut, crop);
+trimImage(filename, filenameOut);
+trimImage(filename, filenameOut, cropInfo);
 trimImage(filename, filenameOut, callback);
-trimImage(filename, filenameOut, crop, callback);
+trimImage(filename, filenameOut, cropInfo, callback);
 ```
 
 Property           | Necessary | Type         | Plugin default value
 -------------------|-----------|--------------|-----------
 filename           | yes       | `string`     |
 filenameOut        | yes       | `string`     |
-crop               | no        | `object`     | { top: true, right: true, bottom: true, left: true }
+cropInfo           | no        | `object`     | { top: true, right: true, bottom: true, left: true }
 callback           | no        | `function`   | (err) => {}
 
 More detailed explanation is below.
@@ -34,7 +35,7 @@ The input filename
 #### filenameOut
 The output filename
 
-#### crop
+#### cropInfo
 Defines which sides will be cut. By default, all sides are started as `true`
 
 #### callback
