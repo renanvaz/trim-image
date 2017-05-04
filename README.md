@@ -24,8 +24,8 @@ Property           | Necessary | Type         | Plugin default value
 -------------------|-----------|--------------|-----------
 filename           | yes       | `string`     |
 filenameOut        | yes       | `string`     |
-cropInfo           | no        | `object`     | ```js { top: true, right: true, bottom: true, left: true } ```
-callback           | no        | `function`   | ```js (err) => {} ```
+cropInfo           | no        | `object`     | `{ top: true, right: true, bottom: true, left: true } `
+callback           | no        | `function`   | `(err) => {} `
 
 More detailed explanation is below.
 
