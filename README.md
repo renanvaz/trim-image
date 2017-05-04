@@ -1,4 +1,4 @@
-# trimImage
+# trim-image
 
 > Remove transparent pixels from image borders
 
