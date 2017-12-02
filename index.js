@@ -1,6 +1,8 @@
 const getPixels   = require('get-pixels');
 const savePixels  = require('save-pixels');
 const fs          = require('fs');
+const path        = require('path');
+const mkdirp      = require('mkdirp');
 
 module.exports = function trimImage(filename, filenameOut, ...rest) {
   let crop  = typeof rest[0] == 'Function' ? {} : rest[0];
@@ -87,6 +89,14 @@ module.exports = function trimImage(filename, filenameOut, ...rest) {
     if ((cropData.left > cropData.right) || (cropData.top > cropData.bottom)) {
       cb('Crop coordinates overflow:', filename);
     } else {
+      const dirname = path.dirname(filenameOut);
+
+      if (!fs.existsSync(dirname)) {
+        mkdirp(dirname, function (err) {
+          if (err) console.error(err);
+        });
+      }
+
       savePixels(pixels.hi(cropData.right, cropData.bottom).lo(cropData.left, cropData.top), 'png').pipe(fs.createWriteStream(filenameOut));
       cb(false);
     }
