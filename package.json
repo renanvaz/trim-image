@@ -1,28 +1,28 @@
 {
   "name": "trim-image",
-  "version": "1.0.2",
   "description": "Remove transparent pixels from image borders",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "trim-image",
-    "image",
-    "png",
-    "trim",
-    "crop",
-    "transparent"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/renanvaz/trim-image.git"
-  },
+  "version": "1.0.2",
   "author": "Renan Vaz <renan.c.vaz@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "get-pixels": "^3.3.0",
     "mkdirp": "^0.5.1",
     "save-pixels": "^2.3.4"
+  },
+  "keywords": [
+    "crop",
+    "image",
+    "png",
+    "transparent",
+    "trim",
+    "trim-image"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/renanvaz/trim-image.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
