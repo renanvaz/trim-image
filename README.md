@@ -45,7 +45,6 @@ The callback function for async flow and error handle
 ## Simple example
 ```js
 const trimImage   = require('trim-image');
-const fs          = require('fs');
 
 trimImage(`images/${filename}`, `out/${filename}`);
 ```
