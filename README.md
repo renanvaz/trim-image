@@ -62,6 +62,21 @@ trimImage(`images/${filename}`,null, {},(err,buff) => {
   }
 });
 ```
+## Buffer input example
+```js
+const trimImage   = require('trim-image');
+const fs          = require('fs');
+
+var buf = fs.readFileSync(`images/inner/test.png`);
+/* For buffer as input the mime-type must be specified using bufferMime option */
+trimImage(buf, `out/inner/buffer-input-test.png`,{bufferMime:'image/png'}, (err) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+});
+```
+
 ## Complete example
 ```js
 const trimImage     = require('trim-image');

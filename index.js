@@ -14,10 +14,11 @@ module.exports = function trimImage(filename, filenameOut, ...rest) {
       top: true,
       right: true,
       bottom: true,
-      left: true
+      left: true,
+      bufferMime: 'image/png'
     }, crop);
 
-  getPixels(filename, (err, pixels) => {
+  getPixels(filename, Buffer.isBuffer(filename)?crop.bufferMime:null,(err, pixels) => {
     if (err) {
       cb('Bad image path:', filename);
       return;

@@ -24,6 +24,15 @@ trimImage(`images/inner/test.png`, `out/inner/test1.png`, { top: false }, (err) 
     }
 });
 
+var buf = fs.readFileSync(`images/inner/test.png`);
+trimImage(buf, `out/inner/buffer-input-test.png`,{bufferMime:'image/png'}, (err) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+});
+
+
 trimImage(`images/inner/test.png`, `out/inner/test2.png`, { right: false }, (err) => {
     if (err) {
       console.log(err);
