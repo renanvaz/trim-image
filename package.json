@@ -6,7 +6,8 @@
   "dependencies": {
     "get-pixels": "^3.3.0",
     "mkdirp": "^0.5.1",
-    "save-pixels": "^2.3.4"
+    "save-pixels": "^2.3.4",
+    "stream": "0.0.2"
   },
   "keywords": [
     "crop",
