@@ -20,12 +20,12 @@ trimImage(filename, filenameOut, callback);
 trimImage(filename, filenameOut, cropInfo, callback);
 ```
 
-Property           | Necessary | Type         | Plugin default value
--------------------|-----------|--------------|-----------
-filename           | yes       | `string`     |
-filenameOut        | yes       | `string`     |
-cropInfo           | no        | `object`     | `{ top: true, right: true, bottom: true, left: true } `
-callback           | no        | `function`   | `(err) => {} `
+Property           | Necessary | Type                   | Plugin default value
+-------------------|-----------|------------------------|-----------
+filename           | yes       | `string`               |
+filenameOut        | yes       | `string` or `null`     |
+cropInfo           | no        | `object`               | `{ top: true, right: true, bottom: true, left: true } `
+callback           | no        | `function`             | `(err,buffer) => {} `
 
 More detailed explanation is below.
 
@@ -33,7 +33,7 @@ More detailed explanation is below.
 The input filename
 
 #### filenameOut
-The output filename
+The output filename. If set to `null`, then output is passed as buffer to callback function.
 
 #### cropInfo
 Defines which sides will be cut. By default, all sides are started as `true`
