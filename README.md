@@ -24,7 +24,7 @@ Property           | Necessary | Type                   | Plugin default value
 -------------------|-----------|------------------------|-----------
 filename           | yes       | `string`               |
 filenameOut        | yes       | `string` or `null`     |
-cropInfo           | no        | `object`               | `{ top: true, right: true, bottom: true, left: true } `
+cropInfo           | no        | `object`               | `{ top: true, right: true, bottom: true, left: true, bufferMime: 'image/png' } `
 callback           | no        | `function`             | `(err,buffer) => {} `
 
 More detailed explanation is below.
@@ -37,6 +37,7 @@ The output filename. If set to `null`, then output is passed as buffer to callba
 
 #### cropInfo
 Defines which sides will be cut. By default, all sides are started as `true`
+If Buffer instance is used instead of path as input, mime-type of buffer needs to be specified in `bufferMime` field, defaults to 'image/png'.
 
 #### callback
 The callback function for async flow and error handle
