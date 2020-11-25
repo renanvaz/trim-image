@@ -53,7 +53,7 @@ trimImage(`images/${filename}`, `out/${filename}`);
 const trimImage   = require('trim-image');
 const fs          = require('fs');
 
-trimImage(`images/${filename}`,null, (err,buff) => {
+trimImage(`images/${filename}`,null, {},(err,buff) => {
   if (err) {
     console.log(err);
     return;
