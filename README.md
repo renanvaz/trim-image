@@ -48,7 +48,20 @@ const trimImage   = require('trim-image');
 
 trimImage(`images/${filename}`, `out/${filename}`);
 ```
+## Buffer output example
+```js
+const trimImage   = require('trim-image');
+const fs          = require('fs');
 
+trimImage(`images/${filename}`,null, (err,buff) => {
+  if (err) {
+    console.log(err);
+    return;
+  } else {
+    fs.writeFileSync(`out/${filename}`,buf);
+  }
+});
+```
 ## Complete example
 ```js
 const trimImage     = require('trim-image');
