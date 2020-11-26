@@ -20,12 +20,12 @@ trimImage(filename, filenameOut, callback);
 trimImage(filename, filenameOut, cropInfo, callback);
 ```
 
-Property           | Necessary | Type         | Plugin default value
--------------------|-----------|--------------|-----------
-filename           | yes       | `string`     |
-filenameOut        | yes       | `string`     |
-cropInfo           | no        | `object`     | `{ top: true, right: true, bottom: true, left: true } `
-callback           | no        | `function`   | `(err) => {} `
+Property           | Necessary | Type                   | Plugin default value
+-------------------|-----------|------------------------|-----------
+filename           | yes       | `string`               |
+filenameOut        | yes       | `string` or `null`     |
+cropInfo           | no        | `object`               | `{ top: true, right: true, bottom: true, left: true, bufferMime: 'image/png' } `
+callback           | no        | `function`             | `(err,buffer) => {} `
 
 More detailed explanation is below.
 
@@ -33,10 +33,11 @@ More detailed explanation is below.
 The input filename
 
 #### filenameOut
-The output filename
+The output filename. If set to `null`, then output is passed as buffer to callback function.
 
 #### cropInfo
 Defines which sides will be cut. By default, all sides are started as `true`
+If Buffer instance is used instead of path as input, mime-type of buffer needs to be specified in `bufferMime` field, defaults to 'image/png'.
 
 #### callback
 The callback function for async flow and error handle
@@ -47,6 +48,34 @@ The callback function for async flow and error handle
 const trimImage   = require('trim-image');
 
 trimImage(`images/${filename}`, `out/${filename}`);
+```
+## Buffer output example
+```js
+const trimImage   = require('trim-image');
+const fs          = require('fs');
+
+trimImage(`images/${filename}`,null, {},(err,buff) => {
+  if (err) {
+    console.log(err);
+    return;
+  } else {
+    fs.writeFileSync(`out/${filename}`,buf);
+  }
+});
+```
+## Buffer input example
+```js
+const trimImage   = require('trim-image');
+const fs          = require('fs');
+
+var buf = fs.readFileSync(`images/inner/test.png`);
+/* For buffer as input the mime-type must be specified using bufferMime option */
+trimImage(buf, `out/inner/buffer-input-test.png`,{bufferMime:'image/png'}, (err) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+});
 ```
 
 ## Complete example

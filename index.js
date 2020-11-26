@@ -3,6 +3,8 @@ const savePixels  = require('save-pixels');
 const fs          = require('fs');
 const path        = require('path');
 const mkdirp      = require('mkdirp');
+const Stream      = require('stream');
+
 
 module.exports = function trimImage(filename, filenameOut, ...rest) {
   let crop  = typeof rest[0] == 'Function' ? {} : rest[0];
@@ -13,9 +15,10 @@ module.exports = function trimImage(filename, filenameOut, ...rest) {
       right: true,
       bottom: true,
       left: true,
+      bufferMime: 'image/png'
     }, crop);
 
-  getPixels(filename, (err, pixels) => {
+  getPixels(filename, Buffer.isBuffer(filename)?crop.bufferMime:null,(err, pixels) => {
     if (err) {
       cb('Bad image path:', filename);
       return;
@@ -89,16 +92,35 @@ module.exports = function trimImage(filename, filenameOut, ...rest) {
     if ((cropData.left > cropData.right) || (cropData.top > cropData.bottom)) {
       cb('Crop coordinates overflow:', filename);
     } else {
-      const dirname = path.dirname(filenameOut);
-
-      if (!fs.existsSync(dirname)) {
-        mkdirp(dirname, function (err) {
-          if (err) console.error(err);
+      if(filenameOut===null) {
+        var buf = Buffer.from([]);
+        var sink = new Stream.Writable({
+          write: function(chunk,encoding,next) {
+            buf = Buffer.concat([buf, chunk]);
+            next();
+          }
         });
+        sink.error = (err)=>{
+          cb(err);
+        }
+        sink.end = ()=>{
+          cb(false,buf)
+        }
+        savePixels(pixels.hi(cropData.right, cropData.bottom).lo(cropData.left, cropData.top), 'png').pipe(sink);
+
+      } else {
+        const dirname = path.dirname(filenameOut);
+
+        if (!fs.existsSync(dirname)) {
+          mkdirp(dirname, function (err) {
+            if (err) console.error(err);
+          });
+        }
+
+        savePixels(pixels.hi(cropData.right, cropData.bottom).lo(cropData.left, cropData.top), 'png').pipe(fs.createWriteStream(filenameOut));
+        cb(false);
       }
 
-      savePixels(pixels.hi(cropData.right, cropData.bottom).lo(cropData.left, cropData.top), 'png').pipe(fs.createWriteStream(filenameOut));
-      cb(false);
     }
   });
 };
